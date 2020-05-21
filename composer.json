@@ -1,0 +1,43 @@
+{
+    "name": "slm/b2b-api",
+    "description": "SLM B2B REST API including db etc.",
+    "keywords": [
+        "slm",
+        "b2b-api"
+    ],
+    "homepage": "https://github.com/slm/b2b-api",
+    "license": "The Unlicense",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Aaron Carr",
+            "email": "aaron.carr@stlouismusic.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Slm\\B2b\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Slm\\B2b\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "Slm\\B2b\\Providers\\SlmB2bServiceProvider"
+            ]
+        }
+    }
+}
