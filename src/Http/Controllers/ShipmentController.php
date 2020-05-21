@@ -2,7 +2,12 @@
 
 namespace Slm\B2b\Http\Controllers;
 
+use Slm\B2b\Models\Shipment;
 use Illuminate\Http\Request;
+
+use Slm\B2b\Services\ShipmentService;
+use Slm\B2b\Http\Resources\Shipment as ShipmentResource;
+use Slm\B2b\Http\Resources\ShipmentCollection as ShipmentResourceCollection;
 
 class ShipmentController extends Controller
 {
@@ -11,9 +16,16 @@ class ShipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected ShipmentService $shipmentService;
+
+    public function __controller(ShipmentService $shipmentService)
+    {
+        $this->shipmentService = $shipmentService;
+    }
+
     public function index()
     {
-        //
+        return response()->json(['shipments', Shipment::all()]);
     }
 
     /**
@@ -35,7 +47,8 @@ class ShipmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $shipment = $this->shipmentService->find($id);
+        return new ShipmentResource($shipment);
     }
 
     /**
