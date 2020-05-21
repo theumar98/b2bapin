@@ -47,7 +47,7 @@ class SlmB2bRouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        $route_entities = ['product','orders','brands','categories'];
+        $route_entities = ['product','orders','shipments','brands','categories'];
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
