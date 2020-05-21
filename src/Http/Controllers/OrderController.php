@@ -3,6 +3,10 @@
 namespace Slm\B2b\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Slm\B2b\Models\Order;
+use Slm\B2b\Services\OrderService;
+use Slm\B2b\Http\Resources\Order as OrderResource;
+use Slm\B2b\Http\Resources\OrderCollection as OrderResourceCollection;
 
 class OrderController extends Controller
 {
@@ -11,9 +15,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected OrderService $orderService;
+
+    public function __controller(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     public function index()
     {
-        //
+        $order = $this->orderService->all();
+        return new OrderResource($order);
     }
 
     /**
@@ -35,7 +47,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = $this->orderService->find($id);
+        return new OrderResource($order);
     }
 
     /**
@@ -60,4 +73,17 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function orderShipments($id)
+    {
+        $order = $this->orderService->orderShipments($id);
+        return new OrderResource($order);
+    }
+
+    public function orderItems($id)
+    {
+        $order = $this->orderService->orderItems($id);
+        return new OrderResource($order);
+    }
+
 }
